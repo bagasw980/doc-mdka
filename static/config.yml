@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: bagasw90/doc-mdka
+  repo: bagasw980/doc-mdka
   branch: master
   auth_type: implicit
   base_url: https://88fa-2001-448a-2072-26c8-3d80-998b-cbd4-5693.ngrok-free.app
@@ -11,15 +11,26 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: "est"
-    label: "Est"
-    folder: "est"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - label: "Title"
-        name: "title"
-        widget: "string"
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
+- name: blog
+  label: "blog"
+  folder: blog
+  identifier_field: title
+  extension: md
+  widget: "list"
+  create: true
+  slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+  fields:
+    - { name: title, label: Title, widget: string }
+    - { name: body, label: Body, widget: markdown }
+    - { name: slug, label: Slug, widget: string }
+    - label: "Tags"
+      name: "tags"
+      widget: "list"
+    - label: "Authors"
+      name: "authors"
+      widget: "list"
+      fields:
+        - { name: name, label: Name, widget: string }
+        - { name: title, label: Title, widget: string }
+        - { name: url, label: URL, widget: string }
+        - { name: imageUrl, label: ImageURL, widget: string }

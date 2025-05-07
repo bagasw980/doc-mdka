@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: bagasw90/doc-mdka
+  repo: bagasw980/doc-mdka
   branch: master
   auth_type: oauth
   base_url: https://88fa-2001-448a-2072-26c8-3d80-998b-cbd4-5693.ngrok-free.app
