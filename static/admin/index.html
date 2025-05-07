@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Content Manager</title>
+
+    <!-- Prevent auto-init -->
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+
+    <!-- Decap CMS & YAML parser -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  </head>
+  <body>
+    <div id="nc-root"></div>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        fetch("/admin/decap-config.yml")
+          .then((res) => {
+            if (!res.ok) throw new Error("Config not found or invalid");
+            return res.text();
+          })
+          .then((yamlText) => {
+            const config = jsyaml.load(yamlText);
+            console.log(
+              "Init config collection count:",
+              config.collections.length
+            );
+            CMS.init({ config });
+          })
+          .catch((err) => {
+            document.body.innerHTML = `<pre style="color:red;">${err}</pre>`;
+            console.error("Gagal load config:", err);
+          });
+        // const urlParams = new URLSearchParams(window.location.search);
+        // const token = urlParams.get("access_token");
+        // if (token) {
+        //   localStorage.setItem(
+        //     "netlify-cms-user",
+        //     JSON.stringify({
+        //       token,
+        //       backendName: "github",
+        //       login: true,
+        //     })
+        //   );
+        //   // Redirect ke CMS dashboard tanpa token di URL
+        //   window.location.href = "/admin";
+        // } else {
+        //   document.body.innerHTML = "<h1>Token not found.</h1>";
+        // }
+      });
+    </script>
+  </body>
+</html>

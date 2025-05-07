@@ -1,0 +1,25 @@
+backend:
+  name: github
+  repo: bagasw90/doc-mdka
+  branch: master
+  auth_type: implicit
+  base_url: https://88fa-2001-448a-2072-26c8-3d80-998b-cbd4-5693.ngrok-free.app
+  auth_endpoint: oauth/authorize
+  token_endpoint: oauth/callback
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: "test"
+    label: "Test"
+    folder: "test"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
